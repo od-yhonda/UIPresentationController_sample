@@ -14,6 +14,7 @@
 		5F2D591B2356F54400B95A26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F2D59192356F54400B95A26 /* LaunchScreen.storyboard */; };
 		5F2D59262356F54400B95A26 /* UIPresentationController_sampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2D59252356F54400B95A26 /* UIPresentationController_sampleTests.swift */; };
 		5F2D59312356F54400B95A26 /* UIPresentationController_sampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2D59302356F54400B95A26 /* UIPresentationController_sampleUITests.swift */; };
+		5F2D59412356F8CE00B95A26 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2D59402356F8CE00B95A26 /* CustomPresentationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		5F2D592C2356F54400B95A26 /* UIPresentationController_sampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UIPresentationController_sampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F2D59302356F54400B95A26 /* UIPresentationController_sampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPresentationController_sampleUITests.swift; sourceTree = "<group>"; };
 		5F2D59322356F54400B95A26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F2D59402356F8CE00B95A26 /* CustomPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				5F2D59172356F54400B95A26 /* Assets.xcassets */,
 				5F2D59192356F54400B95A26 /* LaunchScreen.storyboard */,
 				5F2D591C2356F54400B95A26 /* Info.plist */,
+				5F2D59402356F8CE00B95A26 /* CustomPresentationController.swift */,
 			);
 			path = UIPresentationController_sample;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F2D59412356F8CE00B95A26 /* CustomPresentationController.swift in Sources */,
 				5F2D59132356F53400B95A26 /* ViewController.swift in Sources */,
 				5F2D59112356F53400B95A26 /* AppDelegate.swift in Sources */,
 			);
