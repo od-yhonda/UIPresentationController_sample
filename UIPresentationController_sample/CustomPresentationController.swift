@@ -21,7 +21,11 @@ final class CustomPresentationController: UIPresentationController {
     }()
     
     private lazy var closeButton: UIButton = {
-        let button = UIButton(type: UIButton.ButtonType.infoLight)
+        
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+//        button.imageView?.image = #imageLiteral(resourceName: "sample_icon")
+        button.setImage(#imageLiteral(resourceName: "sample_icon"), for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
         button.addTarget(self, action: #selector(closeButtonDidTap(_:)), for: .touchUpInside)
         return button
     }()
@@ -40,20 +44,42 @@ final class CustomPresentationController: UIPresentationController {
     let margin = (x: CGFloat(30), y: CGFloat(220.0))
     private let contentInsets = UIEdgeInsets(top: 10, left: 30, bottom: 20, right: 20)
     
+    
+    override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
+        super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
+        
+        presentedViewController.view.addSubview(closeButton)
+        
+//        closeButton.centerXAnchor.constraint(equalToSystemSpacingAfter: presentedViewController.view.trailingAnchor, multiplier: 0).isActive = true
+//        closeButton.centerYAnchor.constraint(equalToSystemSpacingBelow: presentedViewController.view.topAnchor, multiplier: 0).isActive = true
+    }
+    
     // 表示トランジション開始前に呼ばれる
     override func presentationTransitionWillBegin() {
+        super.presentationTransitionWillBegin()
         
-        guard let containerView = containerView else { return }
-        containerView.insertSubview(overlayView, at: 0)
+        containerView?.addSubview(overlayView)
+        overlayView.addSubview(presentedViewController.view)
         
-        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { [weak self] context in
-            self?.overlayView.alpha = 0.7
-            },
-                                                               completion: nil)
+        let transitionCoordinator = presentedViewController.transitionCoordinator
+        transitionCoordinator?.animate(alongsideTransition: { cont in
+            self.overlayView.alpha = 0.7
+        },
+                                       completion: nil)
+        
+        
+//        guard let containerView = containerView else { return }
+//        containerView.insertSubview(overlayView, at: 0)
+//
+//        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { [weak self] context in
+//            self?.overlayView.alpha = 0.7
+//            },
+//                                                               completion: nil)
     }
     
     // 非表示トランジション開始前に呼ばれる
     override func dismissalTransitionWillBegin() {
+        super.dismissalTransitionWillBegin()
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { [weak self] context in
             self?.overlayView.alpha = 0.0
             },
@@ -62,41 +88,61 @@ final class CustomPresentationController: UIPresentationController {
     
     // 非表示トランジション開始後に呼ばれる
     override func dismissalTransitionDidEnd(_ completed: Bool) {
-        if completed {
+        super.dismissalTransitionDidEnd(completed)
+//        if completed {
+//            overlayView.removeFromSuperview()
+//        }
+        
+        if !completed {
             overlayView.removeFromSuperview()
         }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        
+        super.viewWillTransition(to: size, with: coordinator)
     }
     
     // 子のコンテナのサイズを返す
     override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
-        return CGSize(width: parentSize.width - margin.x, height: parentSize.height - margin.y)
+//        return CGSize(width: parentSize.width - margin.x, height: parentSize.height - margin.y)
+        return CGSize(width: parentSize.width/2, height: parentSize.height/2)
     }
     
     // 呼び出し先の View Controller の Frame を返す
     override var frameOfPresentedViewInContainerView: CGRect {
+        
+        guard let containerView = containerView else { return CGRect() }
+        
+//        var frame = CGRect()
+        
+        
+        
+        let containerBounds = containerView.bounds
+        let childContentSize = size(forChildContentContainer: presentedViewController, withParentContainerSize: containerBounds.size)
+        
         var presentedViewFrame = CGRect()
-        let containerBounds = containerView?.bounds
-        let childContentSize = size(forChildContentContainer: presentedViewController, withParentContainerSize: containerBounds!.size)
         presentedViewFrame.size = childContentSize
-        presentedViewFrame.origin.x = margin.x / 2.0
-        presentedViewFrame.origin.y = margin.y / 2.0
+        presentedViewFrame.origin.x = containerView.frame.midX - presentedViewFrame.midX
+        presentedViewFrame.origin.y = containerView.frame.midY - presentedViewFrame.midY
         
         return presentedViewFrame
     }
 
     // レイアウト開始前に呼ばれる
     override func containerViewWillLayoutSubviews() {
+        super.containerViewWillLayoutSubviews()
         overlayView.frame = containerView!.bounds
-        presentedView!.frame = frameOfPresentedViewInContainerView
-        presentedView?.addSubview(closeButton)
+        presentedView?.frame = frameOfPresentedViewInContainerView
+        let s = CGRect(x: (presentedView?.frame.width ?? 0) - 15,
+                       y: -15,
+                       width: 30,
+                       height: 30)
+        closeButton.frame = s
     }
 
     // レイアウト開始後に呼ばれる
     override func containerViewDidLayoutSubviews() {
+        super.containerViewDidLayoutSubviews()
     }
 }
 

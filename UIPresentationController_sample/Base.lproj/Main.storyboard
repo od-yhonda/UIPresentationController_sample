@@ -19,8 +19,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Q6-A9-kHb">
-                                <rect key="frame" x="164.5" y="318.5" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="168.5" y="318.5" width="38" height="30"/>
+                                <state key="normal" title="Show"/>
                                 <connections>
                                     <action selector="didTapButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vhg-yx-9ur"/>
                                 </connections>
@@ -36,6 +36,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="98" y="38"/>
         </scene>
         <!--Modal View Controller-->
         <scene sceneID="gy1-Fl-Np8">
@@ -44,18 +45,7 @@
                     <view key="view" contentMode="scaleToFill" id="olO-Cr-WhY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PPM-oJ-tc3">
-                                <rect key="frame" x="345" y="20" width="30" height="30"/>
-                                <color key="backgroundColor" red="0.72901447709966982" green="0.71998449883360705" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="×"/>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="PPM-oJ-tc3" firstAttribute="top" secondItem="6MH-lC-fsA" secondAttribute="top" id="Zj8-Lc-VAA"/>
-                            <constraint firstItem="6MH-lC-fsA" firstAttribute="trailing" secondItem="PPM-oJ-tc3" secondAttribute="trailing" id="dhg-mf-QFd"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6MH-lC-fsA"/>
                     </view>
                 </viewController>
