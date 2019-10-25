@@ -23,27 +23,26 @@ final class CustomPresentationController: UIPresentationController {
     private lazy var closeButton: UIButton = {
         
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-//        button.imageView?.image = #imageLiteral(resourceName: "sample_icon")
         button.setImage(#imageLiteral(resourceName: "sample_icon"), for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
         button.addTarget(self, action: #selector(closeButtonDidTap(_:)), for: .touchUpInside)
         return button
     }()
     
-    private lazy var label: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.textColor = UIColor.white
-        label.lineBreakMode = .byWordWrapping
-        label.backgroundColor = UIColor.clear
-        label.numberOfLines = 2
-        label.font = UIFont.preferredFont(forTextStyle: .caption1)
-        
-        return label
-    }()
+//    private lazy var label: UILabel = {
+//        let label = UILabel(frame: .zero)
+//        label.textColor = UIColor.white
+//        label.lineBreakMode = .byWordWrapping
+//        label.backgroundColor = UIColor.clear
+//        label.numberOfLines = 2
+//        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+//
+//        return label
+//    }()
     
     let margin = (x: CGFloat(30), y: CGFloat(220.0))
     private let contentInsets = UIEdgeInsets(top: 10, left: 30, bottom: 20, right: 20)
-    
+    private var screenRatio: Float?
     
     override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
@@ -80,10 +79,12 @@ final class CustomPresentationController: UIPresentationController {
     // 非表示トランジション開始前に呼ばれる
     override func dismissalTransitionWillBegin() {
         super.dismissalTransitionWillBegin()
-        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { [weak self] context in
+        
+        let transitionCoordinator = presentedViewController.transitionCoordinator
+        transitionCoordinator?.animate(alongsideTransition: { [weak self] context in
             self?.overlayView.alpha = 0.0
             },
-                                                               completion: nil)
+                                       completion: nil)
     }
     
     // 非表示トランジション開始後に呼ばれる
@@ -104,18 +105,15 @@ final class CustomPresentationController: UIPresentationController {
     
     // 子のコンテナのサイズを返す
     override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
-//        return CGSize(width: parentSize.width - margin.x, height: parentSize.height - margin.y)
+        
         return CGSize(width: parentSize.width/2, height: parentSize.height/2)
+//        return parentSize
     }
     
     // 呼び出し先の View Controller の Frame を返す
     override var frameOfPresentedViewInContainerView: CGRect {
         
         guard let containerView = containerView else { return CGRect() }
-        
-//        var frame = CGRect()
-        
-        
         
         let containerBounds = containerView.bounds
         let childContentSize = size(forChildContentContainer: presentedViewController, withParentContainerSize: containerBounds.size)
