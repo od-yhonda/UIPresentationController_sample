@@ -20,14 +20,14 @@ final class CustomPresentationController: UIPresentationController {
         return view
     }()
     
-    private lazy var closeButton: UIButton = {
-        
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        button.setImage(#imageLiteral(resourceName: "sample_icon"), for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
-        button.addTarget(self, action: #selector(closeButtonDidTap(_:)), for: .touchUpInside)
-        return button
-    }()
+//    private lazy var closeButton: UIButton = {
+//
+//        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+//        button.setImage(#imageLiteral(resourceName: "sample_icon"), for: .normal)
+//        button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+//        button.addTarget(self, action: #selector(closeButtonDidTap(_:)), for: .touchUpInside)
+//        return button
+//    }()
     
 //    private lazy var label: UILabel = {
 //        let label = UILabel(frame: .zero)
@@ -40,25 +40,35 @@ final class CustomPresentationController: UIPresentationController {
 //        return label
 //    }()
     
-    let margin = (x: CGFloat(30), y: CGFloat(220.0))
-    private let contentInsets = UIEdgeInsets(top: 10, left: 30, bottom: 20, right: 20)
-    private var screenRatio: Float?
+//    let margin = (x: CGFloat(30), y: CGFloat(220.0))
+//    private let contentInsets = UIEdgeInsets(top: 10, left: 30, bottom: 20, right: 20)
+//    private var screenRatio: Float?
     
     override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
         
-        presentedViewController.view.addSubview(closeButton)
-        
+//        guard let customAlertController = presentedViewController as? ModalViewController else {
+//            fatalError("失敗")
+//        }
+//        contentsSize = customAlertController.contents.frame.size
+        guard let customAlertController = presentedViewController as? CustomAlertController else {
+            fatalError("失敗")
+        }
+        contentsSize = customAlertController.containerView.frame.size
+//        overlayView.addSubview(closeButton)
 //        closeButton.centerXAnchor.constraint(equalToSystemSpacingAfter: presentedViewController.view.trailingAnchor, multiplier: 0).isActive = true
 //        closeButton.centerYAnchor.constraint(equalToSystemSpacingBelow: presentedViewController.view.topAnchor, multiplier: 0).isActive = true
     }
+    
+    var contentsSize: CGSize!
     
     // 表示トランジション開始前に呼ばれる
     override func presentationTransitionWillBegin() {
         super.presentationTransitionWillBegin()
         
-        containerView?.addSubview(overlayView)
-        overlayView.addSubview(presentedViewController.view)
+//        containerView?.addSubview(overlayView)
+//        overlayView.addSubview(presentedViewController.view)
+//        overlayView.addSubview(closeButton)
         
         let transitionCoordinator = presentedViewController.transitionCoordinator
         transitionCoordinator?.animate(alongsideTransition: { cont in
@@ -106,8 +116,10 @@ final class CustomPresentationController: UIPresentationController {
     // 子のコンテナのサイズを返す
     override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
         
-        return CGSize(width: parentSize.width/2, height: parentSize.height/2)
-//        return parentSize
+        var size = parentSize
+        size.height = contentsSize.height+20
+
+        return size
     }
     
     // 呼び出し先の View Controller の Frame を返す
@@ -130,12 +142,15 @@ final class CustomPresentationController: UIPresentationController {
     override func containerViewWillLayoutSubviews() {
         super.containerViewWillLayoutSubviews()
         overlayView.frame = containerView!.bounds
-        presentedView?.frame = frameOfPresentedViewInContainerView
-        let s = CGRect(x: (presentedView?.frame.width ?? 0) - 15,
-                       y: -15,
-                       width: 30,
-                       height: 30)
-        closeButton.frame = s
+        
+        let presentedViewFrame = frameOfPresentedViewInContainerView
+        presentedView?.frame = presentedViewFrame
+        
+//        var closeButtonFrame = closeButton.frame
+//        closeButtonFrame.origin.x = overlayView.frame.midX + presentedViewFrame.size.width/2 - closeButtonFrame.midX
+//        closeButtonFrame.origin.y = overlayView.frame.midY - presentedViewFrame.size.height/2 - closeButtonFrame.midY
+//
+//        closeButton.frame = closeButtonFrame
     }
 
     // レイアウト開始後に呼ばれる
@@ -155,7 +170,7 @@ private extension CustomPresentationController {
 extension CustomPresentationController {
     
     @IBAction func overlayViewDidTap(_ sender: UIGestureRecognizer) {
-        dismiss()
+//        dismiss()
     }
     
     @IBAction func closeButtonDidTap(_ sender: UIButton) {

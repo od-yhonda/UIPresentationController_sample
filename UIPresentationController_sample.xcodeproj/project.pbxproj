@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F01D60F242D934300A7940E /* CustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F01D60E242D934300A7940E /* CustomView.xib */; };
+		5F01D611242DA67800A7940E /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F01D610242DA67800A7940E /* CustomView.swift */; };
 		5F2D59112356F53400B95A26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2D59102356F53400B95A26 /* AppDelegate.swift */; };
 		5F2D59132356F53400B95A26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2D59122356F53400B95A26 /* ViewController.swift */; };
 		5F2D59162356F53400B95A26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F2D59142356F53400B95A26 /* Main.storyboard */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5F01D60E242D934300A7940E /* CustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomView.xib; sourceTree = "<group>"; };
+		5F01D610242DA67800A7940E /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		5F2D590D2356F53400B95A26 /* UIPresentationController_sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIPresentationController_sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F2D59102356F53400B95A26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F2D59122356F53400B95A26 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 				5F2D59192356F54400B95A26 /* LaunchScreen.storyboard */,
 				5F2D591C2356F54400B95A26 /* Info.plist */,
 				5F2D59402356F8CE00B95A26 /* CustomPresentationController.swift */,
+				5F01D60E242D934300A7940E /* CustomView.xib */,
+				5F01D610242DA67800A7940E /* CustomView.swift */,
 			);
 			path = UIPresentationController_sample;
 			sourceTree = "<group>";
@@ -196,13 +202,16 @@
 				TargetAttributes = {
 					5F2D590C2356F53400B95A26 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1110;
 					};
 					5F2D59202356F54400B95A26 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1110;
 						TestTargetID = 5F2D590C2356F53400B95A26;
 					};
 					5F2D592B2356F54400B95A26 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1110;
 						TestTargetID = 5F2D590C2356F53400B95A26;
 					};
 				};
@@ -233,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F2D591B2356F54400B95A26 /* LaunchScreen.storyboard in Resources */,
+				5F01D60F242D934300A7940E /* CustomView.xib in Resources */,
 				5F2D59182356F54400B95A26 /* Assets.xcassets in Resources */,
 				5F2D59162356F53400B95A26 /* Main.storyboard in Resources */,
 			);
@@ -260,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F2D59412356F8CE00B95A26 /* CustomPresentationController.swift in Sources */,
+				5F01D611242DA67800A7940E /* CustomView.swift in Sources */,
 				5F2D59132356F53400B95A26 /* ViewController.swift in Sources */,
 				5F2D59112356F53400B95A26 /* AppDelegate.swift in Sources */,
 			);
@@ -436,6 +447,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9GRH57XF3U;
 				INFOPLIST_FILE = UIPresentationController_sample/Info.plist;
@@ -445,7 +457,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.opendoor.UIPresentationController-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -454,6 +467,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9GRH57XF3U;
 				INFOPLIST_FILE = UIPresentationController_sample/Info.plist;
@@ -463,7 +477,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.opendoor.UIPresentationController-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -483,7 +498,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.opendoor.UIPresentationController-sampleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UIPresentationController_sample.app/UIPresentationController_sample";
 			};
@@ -504,7 +519,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.opendoor.UIPresentationController-sampleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UIPresentationController_sample.app/UIPresentationController_sample";
 			};
@@ -524,7 +539,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.opendoor.UIPresentationController-sampleUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = UIPresentationController_sample;
 			};
@@ -544,7 +559,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.opendoor.UIPresentationController-sampleUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = UIPresentationController_sample;
 			};
