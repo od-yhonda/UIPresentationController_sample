@@ -10,4 +10,23 @@ import UIKit
 
 class CustomView: UIView {
     
+    @IBOutlet weak var label: UILabel! {
+        didSet {}
+    }
+    
+//    override var intrinsicContentSize: CGSize {
+//        var size = label.bounds.size
+//        size.width += 20
+//        size.height += 20
+//        return size
+//    }
+//
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//
+//        invalidateIntrinsicContentSize()
+//        frame.size = intrinsicContentSize
+//
+//        setNeedsDisplay()
+//    }
 }

@@ -220,12 +220,14 @@ class CustomAlertController: UIViewController {
     enum Style {
         case `default`
         case alert
-        case alertWithClose
+        case alertWithClose(title: String?, m: String?)
         case custom(_ contentsView: UIView)
     }
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(frame: .zero)
+     lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [contentsView])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
         return stackView
     }()
     
@@ -234,15 +236,16 @@ class CustomAlertController: UIViewController {
         button.setImage(#imageLiteral(resourceName: "sample_icon"), for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
         button.addTarget(self, action: #selector(didTapCloseButton(_:)), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     lazy var containerView: UIView = {
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-    //        let view = UIView(frame: .zero)
-            view.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
-            return view
-        }()
+        let view = UIView(frame: .zero)
+        view.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     init(preferredStyle: CustomAlertController.Style) {
         self.preferredStyle = preferredStyle
@@ -274,50 +277,101 @@ class CustomAlertController: UIViewController {
     
     var preferredStyle: CustomAlertController.Style
     
+    let a = UIAlertController()
     
     
-    var contentsView: UIView!
     
-    private let contentInsets = UIEdgeInsets(top: 0, left: 10, bottom: 50, right: 10)
+    var contentsView: UIView! {
+        didSet {
+            contentsView.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    private let contentInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     
     let customAlertControllerTransitioningDelegate = CustomAlertControllerTransitioningDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-//        view.addSubview(stackView)
-//
-//        stackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 10.0).isActive = true
-//        stackView.trailingAnchor.constraint(equalToSystemSpacingAfter: view.trailingAnchor, multiplier: 10.0).isActive = true
-//
-//        stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-//
-//        stackView.heightAnchor.constraint(equalTo: contentsView.heightAnchor).isActive = true
         
+        view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         
         view.addSubview(containerView)
-//        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10.0).isActive = true
-//        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 10.0).isActive = true
-//        containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        containerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        
+        
+//        view.addSubview(stackView)
+//        stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: contentInsets.top).isActive = true
+//        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: contentInsets.left).isActive = true
+//        stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: contentInsets.bottom).isActive = true
+//        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: contentInsets.right).isActive = true
+        
+//        let heightConstraint = contentsView.frame.height + contentInsets.top + contentInsets.bottom
+//        stackView.heightAnchor.constraint(equalToConstant: heightConstraint).isActive = true
+        
+//        let widthConstraint = view.frame.width - contentInsets.left - contentInsets.right
+//        stackView.widthAnchor.constraint(equalToConstant: widthConstraint).isActive = true
+        
+        containerView.addSubview(stackView)
+//        stackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        stackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: contentInsets.top).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: contentInsets.left).isActive = true
+//        stackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: contentInsets.bottom).isActive = true
+//        stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: contentInsets.right).isActive = true
+        
+        
+        
+//        let heightConstraint = contentsView.frame.height + contentInsets.top + contentInsets.bottom
+//        stackView.heightAnchor.constraint(equalToConstant: heightConstraint).isActive = true
+        
+//        let widthConstraint = view.frame.width - contentInsets.left - contentInsets.right
+//        stackView.widthAnchor.constraint(equalToConstant: widthConstraint).isActive = true
+        
+//        view.addSubview(containerView)
+//        containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: contentInsets.top).isActive = true
+//        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: contentInsets.left).isActive = true
+//        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: contentInsets.bottom).isActive = true
+//        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: contentInsets.right).isActive = true
 //        containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-//
+
 //        let heightConstraint = contentsView.frame.height + contentInsets.top + contentInsets.bottom
 //        containerView.heightAnchor.constraint(equalToConstant: heightConstraint).isActive = true
-//        containerView.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+//        let widthConstraint = view.frame.width - contentInsets.left - contentInsets.right
+//        containerView.widthAnchor.constraint(equalToConstant: widthConstraint).isActive = true
         
-//        stackView.addArrangedSubview(contentsView)
 //        containerView.addSubview(contentsView)
 //        contentsView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: contentInsets.top).isActive = true
 //        contentsView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: contentInsets.left).isActive = true
 //        contentsView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: contentInsets.bottom).isActive = true
 //        contentsView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: contentInsets.right).isActive = true
-//
-//        containerView.addSubview(closeButton)
-//        closeButton.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-//        closeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+
+        containerView.addSubview(closeButton)
+        closeButton.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        closeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        closeButton.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
+        closeButton.widthAnchor.constraint(equalToConstant: 30.0).isActive = true
+        
+//        view.addSubview(closeButton)
+//        closeButton.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//        closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+//        closeButton.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
+//        closeButton.widthAnchor.constraint(equalToConstant: 30.0).isActive = true
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
 }
 
 extension CustomAlertController {

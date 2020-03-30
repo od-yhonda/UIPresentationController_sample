@@ -55,6 +55,7 @@ final class CustomPresentationController: UIPresentationController {
             fatalError("失敗")
         }
         contentsSize = customAlertController.containerView.frame.size
+        contentsSize = customAlertController.contentsView.frame.size
 //        overlayView.addSubview(closeButton)
 //        closeButton.centerXAnchor.constraint(equalToSystemSpacingAfter: presentedViewController.view.trailingAnchor, multiplier: 0).isActive = true
 //        closeButton.centerYAnchor.constraint(equalToSystemSpacingBelow: presentedViewController.view.topAnchor, multiplier: 0).isActive = true
@@ -116,8 +117,13 @@ final class CustomPresentationController: UIPresentationController {
     // 子のコンテナのサイズを返す
     override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
         
+        if let vc = presentedViewController as? CustomAlertController {
+//            contentsSize = vc.contentsView.frame.size
+        }
+        
         var size = parentSize
         size.height = contentsSize.height+20
+//        size.width = contentsSize.width
 
         return size
     }
@@ -132,7 +138,7 @@ final class CustomPresentationController: UIPresentationController {
         
         var presentedViewFrame = CGRect()
         presentedViewFrame.size = childContentSize
-        presentedViewFrame.origin.x = containerView.frame.midX - presentedViewFrame.midX
+//        presentedViewFrame.origin.x = containerView.frame.midX - presentedViewFrame.midX
         presentedViewFrame.origin.y = containerView.frame.midY - presentedViewFrame.midY
         
         return presentedViewFrame
